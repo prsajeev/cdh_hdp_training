@@ -67,7 +67,7 @@ public class KeysReducer extends  Reducer<Text, Text, Text, Text>
 			if(surrKey == null) //key not derived from masterfile, new records
 			{
 				
-				surrKey = generateKeys(inputs[0],inputs[1]);
+				surrKey = generateKeys(inputs[1]);
 				String outmasterRecord = inputs[0]+","+ inputs[1]+","+surrKey;
 				multipleOutputs.write("", new Text(outmasterRecord), keyFilePath);
 			}
@@ -76,6 +76,14 @@ public class KeysReducer extends  Reducer<Text, Text, Text, Text>
 			multipleOutputs.write("", new Text(outRecord), outputPath);
 		}
 		  
+	}
+	
+	private String generateKeys(String key2)
+	{
+		
+		java.util.UUID idOne = java.util.UUID.fromString(key2);
+		return idOne.toString();
+
 	}
 	
 
